@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title></title>
+</head>
+<style>
+    .form-inline {
+        padding: 2px;
+    }
+
+    .btn {
+        background: none;
+        color: black;
+        border: none;
+        font-weight: bold;
+    }
+
+    .nav {
+        padding-top: none;
+    }
+
+    .products {
+        border: 1px solid black;
+        padding: 2px;
+        margin: 3px;
+        transition: transform 0.5s;
+    }
+
+    .products img {
+        width: 200px;
+        margin: 5px;
+    }
+
+    .products :hover {
+        transform: scale(1.5);
+    }
+
+    #searchInput {
+        margin: 10px;
+        border: 3px solid black;
+    }
+
+    h5 {
+        color: red;
+    }
+
+    .products p {
+        color: green;
+        font-weight: bold;
+    }
+
+    .horizontal-scrollable>.row>.col-xs-4 {
+        display: inline-block;
+        float: none;
+    }
+
+    /* Decorations */
+
+    .col-xs-4 {
+        color: white;
+        font-size: 24px;
+        padding-bottom: 20px;
+        padding-top: 18px;
+    }
+</style>
+
+<body>
+    <div class="container mt-5">
+        <!-- <form action="/profile" method="post">
+            <button class="btn btn-primary" value="Profile" name="Profile-btn">Profile</button>
+        </form> -->
+        <div>
+            <nav class="nav ">
+                <a class="navbar-brand" href="#">Your Logo</a>
+
+                <!-- Add the "Profile" button to the navbar -->
+                <form class="form-inline my-2 my-lg-0 ml-auto navbar-btn" action="/profile" method="post">
+                    <button class="btn btn-primary" value="Profile" name="Profile-btn">Profile</button>
+                </form>
+
+                <!-- Add the "Log-Out" button to the navbar -->
+                <form class="form-inline my-2 my-lg-0 navbar-btn" action="/logout" method="get">
+                    <button class="btn btn-danger" id="Log-Out">Log-Out</button>
+                </form>
+            </nav>
+        </div>
+
+
+        <form action="/passport" method="post">
+            <div class="mt-3">
+                <h1>Status</h1>
+                <% if (locals.status) { %>
+                    <p>Your Bus Pass Status: <%= status %>
+                    </p>
+                    <% if (status !=='Active' ) { %>
+                        <button class="btn btn-warning" id="activatePassBtn">Renew Pass</button>
+                        <ul class="list-group mt-3">
+                            <% locals.history.forEach(entry=> { %>
+                                <li class="list-group-item">
+                                    <%= entry.username %> - Expire Date: <%= entry.exp %>
+                                </li>
+                                <% }); %>
+                        </ul>
+                        <%} else { %>
+                            <p class="text-success">Valid Pass</p>
+                            <% if (locals.qrCodeData) { %>
+                                <!-- Display QR code image if available -->
+                                <img class="qrcode" src="<%= qrCodeData %>" alt="QR Code" class="img-fluid">
+                                <ul class="list-group mt-3">
+                                    <% locals.history.forEach(entry=> { %>
+                                        <li class="list-group-item">
+                                            <%= entry.username %> - Expire Date: <%= entry.exp %>
+                                        </li>
+                                        <% }); %>
+                                </ul>
+                                <% } %>
+                                    <% } %>
+                                        <% } else { %>
+                                            <h3>You don't have any pass active</h3>
+                                            <button class="btn btn-success" id="newPass">New Pass</button>
+                                            <% } %>
+            </div>
+        </form>
+
+        <!-- <form action="/logout" method="get">
+            <button class="btn btn-danger mt-3" id="Log-Out">Log-Out</button>
+        </form> -->
+        <div class="product-container mt-5">
+            <div>
+                <h1 style="color: purple;">Top Deals</h1>
+            </div>
+            <hr style=" border: 3px solid black;">
+            </hr>
+            <div class="container maincontent mt-5">
+                <input type="text" id="searchInput" placeholder="Search by product name">
+                <div class="row" id="productList">
+                    <div class="col products text-center">
+                        <img src="https://baccabucci.com/cdn/shop/files/MG_8227_1080x.jpg?v=1707907677"
+                            class="card-img-top" alt="">
+                        <h5>White Sneakers for Men</h5>
+                        <p>Min. 70% Off</p>
+                    </div>
+                    <div class="col  products text-center">
+                        <img src="https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/2/b/tr:w-270,/2ba7f93HMNY_HAMME00000018_1.jpg?rnd=20200526195200"
+                            alt="">
+                        <h5>Smart Watches</h5>
+                        <p>Min. 40% Off</p>
+                    </div>
+                    <div class="col  products text-center">
+                        <img src="https://assets.panashindia.com/media/catalog/product/cache/1/small_image/269x377/9df78eab33525d08d6e5fb8d27136e95/7/9/791kr02-gfgwnsngrn174.jpg"
+                            alt="">
+                        <h5>Womens Kurtas</h5>
+                        <p>Min. 50% Off</p>
+                    </div>
+                    <div class="col  products text-center">
+                        <img src="https://longwayindia.com/cdn/shop/files/LW-Evoke-355-Red-Neckband-P1-02_1024x1024.jpg?v=1689077924"
+                            alt="">
+                        <h5>Neckband</h5>
+                        <p>Min. 50% Off</p>
+                    </div>
+                    <div class="col products text-center">
+                        <img src="https://rukminim2.flixcart.com/image/850/1000/kuyf8nk0/fan/k/v/t/fksbfan1200cb-ceiling-fan-flipkart-smartbuy-original-imag7yg4wgcsfm9f.jpeg?q=90&crop=false"
+                            alt="">
+                        <h5>Energy Efficient Fans</h5>
+                        <p>Min. 20% Off</p>
+                    </div>
+                    <div class="col products text-center">
+                        <img src="https://rukminim2.flixcart.com/image/850/1000/kdrpksw0/portable-laptop-table/e/f/r/plywood-c25-nmy-furn-master-yellow-original-imafuhzdvnh5c3pz.jpeg?q=90&crop=false"
+                            alt="">
+                        <h5>Neckband</h5>
+                        <p>Min. 50% Off</p>
+                    </div>
+                    <div class="col products text-center">
+                        <img src="https://longwayindia.com/cdn/shop/files/LW-Evoke-355-Red-Neckband-P1-02_1024x1024.jpg?v=1689077924"
+                            alt="">
+                        <h5>Neckband</h5>
+                        <p>Min. 50% Off</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const productList = document.getElementById('productList');
+
+        searchInput.addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+            const products = productList.getElementsByClassName('products');
+            // Loop through all products
+            for (let i = 0; i < products.length; i++) {
+                const productName = products[i].getElementsByTagName('h5')[0].innerText.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    products[i].style.display = 'block';
+                } else {
+                    products[i].style.display = 'none';
+                }
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

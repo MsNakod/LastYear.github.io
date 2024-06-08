@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  
+  <title>Login</title>
+  <style>
+      body {
+        background-image: url('https://sanjivani.org.in/wp-content/uploads/2023/05/000.jpg');
+        height: 100vh;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+      .login{
+        width:30%;
+        position:absolute;
+        top:120px;
+        color: aliceblue;
+        padding:20px;
+        background: linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.8)50%);
+        border:2px solid black;
+        border-radius: 10px;
+        left:35%;
+      }
+      .btn-primary{
+        background-color:orangered;
+        border: none;
+      }
+      
+    </style>
+</head>
+<body class="container ">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 login">
+          <h1 class="text-center">Login</h1>
+          <p class="text-center" style="color:red"><%= message%></p>
+    
+          <form action="/login" method="post">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <div class="mt-3">
+            <a href="/signup" class="btn btn-secondary">New User</a>
+            <a href="/forgotpassword" class="btn btn-link">Forgot Password</a>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>
